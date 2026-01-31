@@ -1,4 +1,4 @@
-/*export 
+export 
 const adviceData = [
   {
     title: "Monitor Your Blood Pressure",
@@ -36,4 +36,4 @@ const adviceData = [
     category: "All"
   }
 ];
-*/
+
