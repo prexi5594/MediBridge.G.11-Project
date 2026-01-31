@@ -1,8 +1,5 @@
 //Education & chronic care tips
 //A small, reusable UI component that displays one advice tip
-
-import React from "react";
-
 const AdviceCard = ({ title, description }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-4 m-2 hover:shadow-xl transition-shadow duration-300">
@@ -13,3 +10,4 @@ const AdviceCard = ({ title, description }) => {
 };
 
 export default AdviceCard;
+
