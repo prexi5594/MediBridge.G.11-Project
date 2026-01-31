@@ -42,3 +42,47 @@ export default AdviceList;
 
 //array and mapping logic.
 
+import React, { useState } from "react";
+import AdviceCard from "./AdviceCard";
+import { adviceData } from "./Advice/data";
+
+const AdviceList = () => {
+  const [category, setCategory] = useState("All");
+
+  const filteredAdvice =
+    category === "All"
+      ? adviceData
+      : adviceData.filter((advice) => advice.category === category);
+
+  return (
+    <div>
+      {/* Category Filter */}
+      <div className="flex gap-2 mb-4 justify-center">
+        {["All", "Diabetes", "Hypertension"].map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setCategory(cat)}
+            className={`px-4 py-2 rounded ${
+              category === cat ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Advice Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {filteredAdvice.map((advice, index) => (
+          <AdviceCard
+            key={index}
+            title={advice.title}
+            description={advice.description}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+export default AdviceList;
