@@ -3,8 +3,8 @@ import MedzSchedule from "./MedzSchedule";
 
 function MedzReminder() {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [showAllMeds, setShowAllMeds] = useState(false);
   const [medications, setMedications] = useState([]);
+
   const [formData, setFormData] = useState({
     name: "",
     dosage: "",
@@ -12,7 +12,15 @@ function MedzReminder() {
     notes: "",
   });
 
-  // Map medications by time for Today’s Schedule
+  // Frequency → Times mapping
+  const frequencyTimesMap = {
+    "Once daily": ["08:00"],
+    "Twice daily": ["08:00", "20:00"],
+    "Three times daily": ["08:00", "14:00", "20:00"],
+    "Four times daily": ["08:00", "12:00", "16:00", "20:00"],
+  };
+
+  // Group medications by time for Today's Schedule
   const scheduleMap = medications.reduce((acc, med) => {
     med.times.forEach((time) => {
       if (!acc[time]) acc[time] = [];
@@ -22,8 +30,9 @@ function MedzReminder() {
   }, {});
 
   const handleSubmit = () => {
-    const times =
-      formData.frequency === "Once daily" ? ["08:00"] : ["08:00", "20:00"];
+    if (!formData.name || !formData.dosage) return;
+
+    const times = frequencyTimesMap[formData.frequency];
 
     setMedications((prev) => [
       ...prev,
@@ -64,66 +73,85 @@ function MedzReminder() {
           </p>
         </div>
 
-        <div className="flex gap-3">
-          <button
-            onClick={() => setIsFormOpen(true)}
-            className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg"
-          >
-            + Add Medication
-          </button>
-
-          <button
-            onClick={() => setShowAllMeds((prev) => !prev)}
-            className="px-4 py-2 bg-green-500 text-white text-sm rounded-lg"
-          >
-            {showAllMeds ? "Hide Medications" : "Open Medications"}
-          </button>
-        </div>
+        <button
+          onClick={() => setIsFormOpen(true)}
+          className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg"
+        >
+          + Add Medication
+        </button>
       </div>
 
       {/* Add Medication Form */}
       {isFormOpen && (
         <div className="bg-white border border-gray-200 rounded-xl p-6 space-y-4">
-          <h3 className="text-lg font-semibold text-gray-900">New Medication</h3>
+          <h3 className="text-lg font-semibold text-gray-900">
+            New Medication
+          </h3>
 
           <div className="grid grid-cols-2 gap-4">
-            <input
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              placeholder="Medication name"
-              className="border rounded-lg p-2"
-            />
+            {/* Medication Name */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">
+                Medication Name
+              </label>
+              <input
+                value={formData.name}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
+                placeholder="e.g. Paracetamol"
+                className="border rounded-lg p-2"
+              />
+            </div>
 
-            <input
-              value={formData.dosage}
-              onChange={(e) =>
-                setFormData({ ...formData, dosage: e.target.value })
-              }
-              placeholder="Dosage"
-              className="border rounded-lg p-2"
-            />
+            {/* Dosage */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">
+                Dosage
+              </label>
+              <input
+                value={formData.dosage}
+                onChange={(e) =>
+                  setFormData({ ...formData, dosage: e.target.value })
+                }
+                placeholder="e.g. 500mg"
+                className="border rounded-lg p-2"
+              />
+            </div>
 
-            <select
-              value={formData.frequency}
-              onChange={(e) =>
-                setFormData({ ...formData, frequency: e.target.value })
-              }
-              className="border rounded-lg p-2"
-            >
-              <option>Once daily</option>
-              <option>Twice daily</option>
-            </select>
+            {/* Frequency */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">
+                Frequency
+              </label>
+              <select
+                value={formData.frequency}
+                onChange={(e) =>
+                  setFormData({ ...formData, frequency: e.target.value })
+                }
+                className="border rounded-lg p-2"
+              >
+                <option>Once daily</option>
+                <option>Twice daily</option>
+                <option>Three times daily</option>
+                <option>Four times daily</option>
+              </select>
+            </div>
 
-            <input
-              value={formData.notes}
-              onChange={(e) =>
-                setFormData({ ...formData, notes: e.target.value })
-              }
-              placeholder="Notes"
-              className="border rounded-lg p-2"
-            />
+            {/* Notes */}
+            <div className="flex flex-col gap-1">
+              <label className="text-sm font-medium text-gray-700">
+                Notes (optional)
+              </label>
+              <input
+                value={formData.notes}
+                onChange={(e) =>
+                  setFormData({ ...formData, notes: e.target.value })
+                }
+                placeholder="e.g. After meals"
+                className="border rounded-lg p-2"
+              />
+            </div>
           </div>
 
           <div className="flex gap-3">
@@ -144,11 +172,16 @@ function MedzReminder() {
         </div>
       )}
 
-      {/* Today’s Schedule */}
+      {/* Today's Schedule */}
       <section className="space-y-4">
-        <h3 className="text-lg font-semibold text-gray-900">Today’s Schedule</h3>
+        <h3 className="text-lg font-semibold text-gray-900">
+          Today’s Schedule
+        </h3>
+
         {Object.keys(scheduleMap).length === 0 ? (
-          <p className="text-sm text-gray-500">No medications scheduled yet.</p>
+          <p className="text-sm text-gray-500">
+            No medications scheduled yet.
+          </p>
         ) : (
           Object.entries(scheduleMap).map(([time, meds]) => (
             <MedzSchedule key={time} time={time} medications={meds} />
@@ -157,39 +190,51 @@ function MedzReminder() {
       </section>
 
       {/* All Medications */}
-      {showAllMeds && (
-        <section className="space-y-4 mt-4">
-          <h3 className="text-lg font-semibold text-gray-900">All Medications</h3>
+      <section className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-900">
+          All Medications
+        </h3>
 
-          {medications.length === 0 ? (
-            <p className="text-sm text-gray-500">No medications added yet.</p>
-          ) : (
-            medications.map((med) => (
-              <div
-                key={med.id}
-                className="bg-white border rounded-xl p-4 flex justify-between"
-              >
-                <div>
-                  <p className="font-semibold text-gray-900">{med.name}</p>
-                  <p className="text-sm text-gray-500">Dosage: {med.dosage}</p>
-                  <p className="text-sm text-gray-500">Frequency: {med.frequency}</p>
-                  <p className="text-sm text-gray-500">Time: {med.times.join(", ")}</p>
-                  <p className="text-sm text-gray-500">Notes: {med.notes}</p>
-                </div>
-
-                <button
-                  onClick={() => handleDelete(med.id)}
-                  className="text-red-500 text-sm"
-                >
-                  Delete
-                </button>
+        {medications.length === 0 ? (
+          <p className="text-sm text-gray-500">
+            No medications added yet.
+          </p>
+        ) : (
+          medications.map((med) => (
+            <div
+              key={med.id}
+              className="bg-white border rounded-xl p-4 flex justify-between"
+            >
+              <div>
+                <p className="font-semibold text-gray-900">{med.name}</p>
+                <p className="text-sm text-gray-500">
+                  Dosage: {med.dosage}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Frequency: {med.frequency}
+                </p>
+                <p className="text-sm text-gray-500">
+                  Time: {med.times.join(", ")}
+                </p>
+                {med.notes && (
+                  <p className="text-sm text-gray-500">
+                    Notes: {med.notes}
+                  </p>
+                )}
               </div>
-            ))
-          )}
-        </section>
-      )}
 
-      {/* Reminder Info */}
+              <button
+                onClick={() => handleDelete(med.id)}
+                className="text-red-500 text-sm"
+              >
+                Delete
+              </button>
+            </div>
+          ))
+        )}
+      </section>
+
+      {/* Info */}
       <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-sm text-yellow-800">
         Reminder: You’ll receive notifications when it’s time to take your
         medications.
