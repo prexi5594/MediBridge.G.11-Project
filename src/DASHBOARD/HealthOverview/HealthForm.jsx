@@ -52,13 +52,7 @@ const HealthForm = ({ onSubmit, onCancel }) => {
     const submitForm = (e) => {
         e.preventDefault();
          onSubmit(formData);
-         setFormData({
-            bloodPressure: '',
-            bloodSugar: '',
-            weight: '',
-            symptoms: '',
-            notes: '',
-        });
+         setFormData({ bloodPressure: '', bloodSugar: '', weight: '', symptoms: '', notes: '' });
     };
 
     return (
