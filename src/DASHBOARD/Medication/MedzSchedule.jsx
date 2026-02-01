@@ -6,15 +6,15 @@ function MedzSchedule({ time, medications }) {
         {time}
       </div>
 
-      {medications.map(med => (
+      {medications.map((med) => (
         <div key={med.id} className="flex justify-between items-start">
           <div>
             <p className="text-gray-900 font-medium">
               {med.name} – {med.dosage}
             </p>
-            <p className="text-sm text-gray-500">
-              {med.notes}
-            </p>
+            {med.notes && (
+              <p className="text-sm text-gray-500">{med.notes}</p>
+            )}
           </div>
 
           <div className="w-5 h-5 rounded-full border border-green-400 flex items-center justify-center">
