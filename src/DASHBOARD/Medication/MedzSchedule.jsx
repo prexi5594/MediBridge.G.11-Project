@@ -1,15 +1,17 @@
 function MedzSchedule({ time, medications }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-4">
+    <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-3 shadow">
       <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-        {time}
+        ⏰ {time}
       </div>
 
       {medications.map((med) => (
-        <div key={med.id} className="flex justify-between items-start">
+        <div
+          key={med.id}
+          className="flex justify-between items-start border-b last:border-none pb-2"
+        >
           <div>
-            <p className="text-gray-900 font-medium">
+            <p className="font-medium text-gray-900">
               {med.name} – {med.dosage}
             </p>
             {med.notes && (
@@ -17,8 +19,8 @@ function MedzSchedule({ time, medications }) {
             )}
           </div>
 
-          <div className="w-5 h-5 rounded-full border border-green-400 flex items-center justify-center">
-            <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+          <div className="w-5 h-5 border border-green-500 rounded-full flex items-center justify-center">
+            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
           </div>
         </div>
       ))}
