@@ -1,65 +1,79 @@
 import { useState } from 'react';
+<<<<<<< HEAD
+=======
+import useAuth from '../HOOKS/UseAuth';
+
+>>>>>>> b5856026b2ab50aa9998f2767fade5a2bfcc317e
 import WelcomeBanner from '../DASHBOARD/HealthOverview/WelcomeBanner';
 import HealthForm from '../DASHBOARD/HealthOverview/HealthForm';
 import HealthDataCard from '../DASHBOARD/HealthOverview/HealthDataCard';
 
 const HealthOverviewPage = () => {
-  const user = {
-    name: 'John Doe',
-    disease: 'Type 1 Diabetes',
-  };
-
+  const { user, submitHealthData, getPatientRecords } = useAuth();
   const [showForm, setShowForm] = useState(false);
-  const [records, setRecords] = useState([]);
 
-  const advice = [
-    { title: 'Blood Pressure', message: 'Your blood pressure looks stable.' },
-    { title: 'Blood Sugar', message: 'Blood sugar is within range.' },
-    { title: 'Weight', message: 'Maintain a healthy lifestyle.' },
-    { title: 'General', message: 'Stay hydrated and take medications.' },
-  ];
+  const records = getPatientRecords(user.id);
+  const latestRecord = records[0];
+
+  const advice = [];
+
+  if (!latestRecord) {
+    advice.push({
+      title: 'Health Advice',
+      message: 'Submit your health data to receive personalized advice.',
+    });
+  } else {
+    advice.push({
+      title: 'Blood Pressure',
+      message: 'Keep monitoring your blood pressure regularly.',
+    });
+
+    advice.push({
+      title: 'Blood Sugar',
+      message: 'Maintain a balanced diet to keep blood sugar stable.',
+    });
+
+    advice.push({
+      title: 'Weight',
+      message: 'Maintain a healthy lifestyle with regular exercise.',
+    });
+  }
 
   const submitForm = (data) => {
-    setRecords([data]);
+    submitHealthData(data);
     setShowForm(false);
   };
 
-
   return (
-    <div>
+    <div className="p-4">
       <WelcomeBanner user={user} />
+
       <button
         onClick={() => setShowForm(true)}
-        className='bg-blue-500'
+        className="bg-blue-500 text-white px-3 py-1 rounded mt-3"
       >
         Submit Health Data
       </button>
+
       {showForm && (
         <HealthForm
           onSubmit={submitForm}
           onCancel={() => setShowForm(false)}
         />
       )}
-    <div>
-      <div>
-        {advice.length === 0 ? (
-          <HealthDataCard title="Personalized Health Advice">
-            <p>Submit health data to receive personalized advice!</p>
-          </HealthDataCard>
-        ) :(
-          advice.map((a, index) => (
-            <HealthDataCard key={index} title={a.title}>
-              <p>{a.message}</p>
-            </HealthDataCard>
-          ))
-        )}
-      </div>
+
+      {advice.map((a, index) => (
+        <HealthDataCard key={index} title={a.title}>
+          <p>{a.message}</p>
+        </HealthDataCard>
+      ))}
+
       <HealthDataCard title="Recent Entries">
         {records.length === 0 ? (
           <p>No health records yet</p>
         ) : (
-          records.map((record, index) => (
-            <div key={index}>
+          records.map((record) => (
+            <div key={record.id}>
               <p>Blood Pressure: {record.bloodPressure}</p>
               <p>Blood Sugar: {record.bloodSugar}</p>
               <p>Weight: {record.weight}</p>
@@ -67,7 +81,6 @@ const HealthOverviewPage = () => {
           ))
         )}
       </HealthDataCard>
-    </div>
     </div>
   );
 };
