@@ -14,7 +14,7 @@ import { useState } from "react";
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
         
-        {/* Logo */}
+        
         <div className="flex flex-col items-center mb-6">
           <div className="w-14 h-14 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
             ⚕
@@ -25,7 +25,6 @@ import { useState } from "react";
           </p>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
