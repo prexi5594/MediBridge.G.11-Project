@@ -195,7 +195,7 @@ function MedzReminder() {
               className="bg-white border rounded-xl p-4 flex justify-between"
             >
               <div className="space-y-1">
-                <p className="font-medium text-gray-900">{med.name}</p>
+                <h3 className="font-medium text-gray-900">💊{med.name}</h3>
                 <p className="text-sm text-gray-600">
                   Dosage: {med.dosage}
                 </p>
