@@ -1,102 +1,102 @@
 export const adviceData = [
   // Diabetes
   {
-    title: "Monitor Blood Sugar",
+    title: "MONITOR BLOOD SUGAR",
     description: "Check your blood sugar daily and log your readings.",
-    category: "Diabetes",
+    category: "DIABETES",
   },
   {
-    title: "Healthy Eating for Diabetes",
+    title: "HEALTHY EATING FOR DIABETES",
     description: "Eat balanced meals with low sugar and high fiber.",
-    category: "Diabetes",
+    category: "DIABETES",
   },
   {
-    title: "Stay Hydrated",
+    title: "STAY HYDRATED",
     description: "Drink enough water to help regulate blood sugar levels.",
-    category: "Diabetes",
+    category: "DIABETES",
   },
 
   // Hypertension
   {
-    title: "Reduce Salt Intake",
+    title: "REDUCE SALT INTAKE",
     description: "Limit salt in your diet to manage blood pressure effectively.",
-    category: "Hypertension",
+    category: "HYPERTENSION",
   },
   {
-    title: "Exercise Regularly",
+    title: "EXERCISE REGULARLY",
     description: "Light daily exercise helps maintain healthy blood pressure.",
-    category: "Hypertension",
+    category: "HYPERTENSION",
   },
   {
-    title: "Stress Management",
+    title: "STRESS MANAGEMENT",
     description: "Practice relaxation techniques like deep breathing and meditation.",
-    category: "Hypertension",
+    category: "HYPERTENSION",
   },
 
   // Asthma
   {
-    title: "Identify Triggers",
+    title: "IDENTIFY TRIGGERS",
     description: "Avoid exposure to smoke, dust, and pollen to reduce attacks.",
-    category: "Asthma",
+    category: "ASTHMA",
   },
   {
-    title: "Use Inhalers Correctly",
+    title: "USE INHALERS CORRECTLY",
     description: "Follow your doctor’s instructions for inhaler usage every day.",
-    category: "Asthma",
+    category: "ASTHMA",
   },
   {
-    title: "Exercise Safely",
+    title: "EXERCISE SAFELY",
     description: "Do light exercise like walking or swimming, and warm up first.",
-    category: "Asthma",
+    category: "ASTHMA",
   },
 
   // Arthritis
   {
-    title: "Joint Care",
+    title: "JOINT CARE",
     description: "Avoid excessive strain on joints and maintain good posture.",
-    category: "Arthritis",
+    category: "ARTHRITIS",
   },
   {
-    title: "Low Impact Exercise",
+    title: "LOW IMPACT EXERCISE",
     description: "Do swimming or yoga to keep joints flexible without stress.",
-    category: "Arthritis",
+    category: "ARTHRITIS",
   },
   {
-    title: "Healthy Diet",
+    title: "HEALTHY DIET",
     description: "Eat anti-inflammatory foods like fish, nuts, and vegetables.",
-    category: "Arthritis",
+    category: "ARTHRITIS",
   },
 
   // COPD
   {
-    title: "Avoid Smoking",
+    title: "AVOID SMOKING",
     description: "Do not smoke and avoid second-hand smoke exposure.",
     category: "COPD",
   },
   {
-    title: "Pulmonary Exercises",
+    title: "PULMONARY EXERCISES",
     description: "Practice breathing exercises to improve lung capacity.",
     category: "COPD",
   },
   {
-    title: "Monitor Symptoms",
+    title: "MONITOR SYMPTOMS",
     description: "Track shortness of breath, coughing, and other symptoms daily.",
     category: "COPD",
   },
 
   // General Advice (All Chronic Illnesses)
   {
-    title: "Medication Adherence",
+    title: "MEDICATION ADHERENCE",
     description: "Take your medications on schedule to maintain control over your condition.",
     category: "All",
   },
   {
-    title: "Regular Check-ups",
+    title: "REGULAR CHECK-UPS",
     description: "Visit your healthcare provider regularly for monitoring and guidance.",
     category: "All",
   },
   {
-    title: "Maintain a Routine",
+    title: "MAINTAIN A ROUTINE",
     description: "Keep consistent sleep, meals, and exercise routines to support overall health.",
     category: "All",
   },

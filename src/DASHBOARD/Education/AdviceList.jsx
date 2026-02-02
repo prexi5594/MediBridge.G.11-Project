@@ -45,7 +45,7 @@ const AdviceList = () => {
           <button
             key={cat}
             onClick={() => setCategory(cat)}
-            className={`px-4 py-2 rounded ${
+            className={`px-6 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 font-bold ${
               category === cat
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 text-gray-800"

@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import WelcomeBanner from '../HealthOverview/WelcomeBanner';
-import HealthForm from '../HealthOverview/HealthForm';
-import HealthDataCard from '../HealthOverview/HealthDataCard';
+import WelcomeBanner from '../DASHBOARD/HealthOverview/WelcomeBanner';
+import HealthForm from '../DASHBOARD/HealthOverview/HealthForm';
+import HealthDataCard from '../DASHBOARD/HealthOverview/HealthDataCard';
 
 const HealthOverviewPage = () => {
   const user = {
