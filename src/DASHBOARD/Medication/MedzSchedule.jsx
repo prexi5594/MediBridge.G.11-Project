@@ -1,46 +1,31 @@
-function MedzSchedule () {
+function MedzSchedule({ time, medications }) {
   return (
-    <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-4">
-      {/* Time */}
+    <div className="bg-white border border-gray-200 rounded-xl p-4 space-y-3 shadow">
       <div className="flex items-center gap-2 text-sm font-semibold text-gray-700">
-        <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
-        08:00
+        ⏰ {time}
       </div>
 
-      {/* Medication Item */}
-      <div className="flex justify-between items-start">
-        <div>
-          <p className="text-gray-900 font-medium">
-            Metformin – 500mg
-          </p>
-          <p className="text-sm text-gray-500">
-            Take with meals
-          </p>
-        </div>
+      {medications.map((med) => (
+        <div
+          key={med.id}
+          className="flex justify-between items-start border-b last:border-none pb-2"
+        >
+          <div>
+            <p className="font-medium text-gray-900">
+              {med.name} – {med.dosage}
+            </p>
+            {med.notes && (
+              <p className="text-sm text-gray-500">{med.notes}</p>
+            )}
+          </div>
 
-        {/* Status Icon Placeholder */}
-        <div className="w-5 h-5 rounded-full border border-green-400 flex items-center justify-center">
-          <span className="w-2 h-2 bg-green-400 rounded-full"></span>
+          <div className="w-5 h-5 border border-green-500 rounded-full flex items-center justify-center">
+            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+          </div>
         </div>
-      </div>
-
-      <div className="flex justify-between items-start">
-        <div>
-          <p className="text-gray-900 font-medium">
-            Lisinopril – 10mg
-          </p>
-          <p className="text-sm text-gray-500">
-            For blood pressure control
-          </p>
-        </div>
-
-        <div className="w-5 h-5 rounded-full border border-green-400 flex items-center justify-center">
-          <span className="w-2 h-2 bg-green-400 rounded-full"></span>
-        </div>
-      </div>
+      ))}
     </div>
   );
-};
+}
 
 export default MedzSchedule;
-
